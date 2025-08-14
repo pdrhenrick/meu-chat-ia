@@ -1,10 +1,12 @@
-# frontend/app.py
+# frontend/app.py - CÓDIGO FINAL CORRIGIDO
 
 import streamlit as st
 import requests
 import json
+import os # <-- IMPORTAÇÃO CORRETA
 
-BACKEND_URL = "http://127.0.0.1:8000/chat"
+# LÓGICA CORRETA PARA A URL DO BACKEND
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000/chat")
 
 st.set_page_config(page_title="Chat com IA", page_icon="🤖")
 st.title("🤖 Chat com IA Personalizada")
