@@ -128,6 +128,11 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 class ChatRequest(BaseModel):
     question: str
 
+@app.get("/")
+def root():
+    return {"message": "API do Agente Inteligente está rodando! Vá para /docs para testar."}
+
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
