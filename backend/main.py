@@ -1,4 +1,4 @@
-# backend/main.py - VERSÃO FINAL CORRIGIDA 2
+# backend/main.py - VERSÃO FINAL CORRIGIDA
 
 import os
 from datetime import datetime
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 # NOVAS IMPORTAÇÕES PARA O AGENTE INTELIGENTE
 from langchain.agents import AgentExecutor, create_react_agent, Tool
 from langchain_community.utilities import SerpAPIWrapper
-from langchain_community.tools import DuckDuckGoSearchRun # Ferramenta de busca gratuita alternativa
+from langchain_community.tools import DuckDuckGoSearchRun
 
 # Importações que ainda usamos
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -27,8 +27,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", temperature=0)
 
 
 # --- 2. DEFINIÇÃO DAS FERRAMENTAS DO AGENTE ---
-
-# FERRAMENTA 0: Relógio e Calendário (Super Rápida)
+# FERRAMENTA 0: Relógio e Calendário
 def get_current_datetime(query: str = "") -> str:
     now = datetime.now()
     dias_semana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"]
@@ -44,6 +43,7 @@ datetime_tool = Tool(
 )
 
 # FERRAMENTA 1: Busca na Internet
+internet_tool = None
 try:
     if os.getenv("SERPAPI_API_KEY"):
         search = SerpAPIWrapper()
@@ -59,9 +59,9 @@ try:
     )
 except Exception as e:
     print(f"AVISO: Erro ao inicializar ferramenta de busca na internet: {e}")
-    internet_tool = None
 
 # FERRAMENTA 2: Busca no Banco de Dados Local (dados.txt)
+local_data_tool = None
 try:
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     loader = TextLoader("dados.txt", encoding="utf-8")
@@ -85,7 +85,6 @@ try:
     print("INFO: Banco de dados vetorial local criado com sucesso.")
 except Exception as e:
     print(f"AVISO: Erro ao criar o banco de dados vetorial local: {e}")
-    local_data_tool = None
 
 
 # --- 3. MONTAGEM FINAL DO AGENTE ---
