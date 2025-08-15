@@ -1,4 +1,4 @@
-# backend/main.py - VERSÃO FINAL: AGENTE DE PESQUISA NA WEB
+# backend/main.py - VERSÃO FINAL: PESQUISADOR DA WEB
 
 import os
 from fastapi import FastAPI
@@ -37,7 +37,7 @@ except Exception as e:
 # Damos instruções claras para a IA resumir os resultados da busca
 template = """
 Você é um assistente de IA especialista em resumir resultados de busca para responder perguntas.
-Use os trechos de contexto da busca abaixo para responder a pergunta do usuário de forma clara e concisa.
+Use os trechos de contexto da busca abaixo para responder a pergunta do usuário de forma clara e completa.
 Responda em português brasileiro.
 
 Contexto da Busca:
