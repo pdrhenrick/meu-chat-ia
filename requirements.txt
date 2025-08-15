@@ -4,10 +4,8 @@ python-dotenv
 google-generativeai
 langchain
 langchain-google-genai
-chromadb
-pydantic
 requests
 streamlit
-langchain-community
+google-search-results
 duckduckgo-search
-
+langchain-community
